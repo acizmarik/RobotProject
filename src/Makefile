@@ -20,7 +20,7 @@ $(PROGRAM).elf: $(OBJS)
 %.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-flash:
+flash: $(PROGRAM).elf
 	avrdude -v -p$(MCU) -carduino -P$(PORT) -b57600 -D -Uflash:w:$(PROGRAM).hex:i
 
 clean:
