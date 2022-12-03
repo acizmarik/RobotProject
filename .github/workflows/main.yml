@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - name: Setup AVR toolchain
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y binutils gcc-avr avr-libc uisp avrdude flex byacc bison
+    - uses: actions/checkout@v3
+    - name: Build solution
+      run: |
+        cd src
+        make
