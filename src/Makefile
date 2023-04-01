@@ -7,7 +7,7 @@ CFLAGS = -Wall -I. -g -Os -mmcu=$(MCU) -DF_CPU=16000000UL
 
 # Source files
 DEPS = config.h 
-OBJS = main.o utils.o libmotor/l298n_dc_motor.o
+OBJS = main.o utils.o libpwm/pwm.o libmotor/l298n_dc_motor.o
 
 all: $(PROGRAM).hex
 
