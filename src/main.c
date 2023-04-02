@@ -1,16 +1,19 @@
 #include "libmotor/l298n_dc_motor.h"
 #include "libpwm/pwm.h"
+#include "libuart/uart.h"
 #include "config.h"
 
 motor_t rear_left_motor;
 motor_t rear_right_motor;
 uint8_t pwm_value = 0;
+char uart_buffer[20];
 
 void setup(void)
 {
-    // Init timer
+    // Initialize timers and UART
     pwm_clear();
     pwm_init();
+    uart_init();
 
     // Setup motors
     rear_left_motor.port_data_register = &PORTB;
@@ -41,7 +44,10 @@ void loop(void)
     motor_pwm_value_set(&rear_left_motor, pwm_value);
     motor_pwm_value_set(&rear_right_motor, pwm_value);
 
-    pwm_value += 5;
+    sprintf(uart_buffer, "PWM: %u\n", pwm_value);
+    uart_putstring(uart_buffer);
+
+    pwm_value += 1;
     _delay_ms(100);
 }
 

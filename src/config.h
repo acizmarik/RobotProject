@@ -1,13 +1,16 @@
 #ifndef HEADER_GUARD_CONFIGURATION_H
 #define HEADER_GUARD_CONFIGURATION_H
 
+#define F_CPU 16000000
+#define BAUD 9600
+
 #include <inttypes.h>
 #include <stdbool.h>
+#include <string.h>
+#include <stdio.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
-
-#define NULL ((void*)0)
 
 // DDRB
 //    - maps to D8 - D13 (the two high bits 6,7 are not usable)
